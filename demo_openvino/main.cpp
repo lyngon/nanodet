@@ -384,7 +384,7 @@ int benchmark_images(NanoDet &detector, const char *imagepath, int input_size)
 
 int main(int argc, char **argv)
 {
-    if (argc != 6)
+    if (argc != 5)
     {
         //                      0  1      2            3            4
         fprintf(stderr, "usage: %s [mode] [input_size] [model.xml] [path]. \n 0. For webcam mode=0, path is cam id; \n 1. For image demo, mode=1, path=xxx/xxx/*.jpg; \n 2. For video, mode=2; \n 3. For benchmark, mode=3 path=0.\n 4. For Image benchmark, mode=4, path=xxx/xxx/*.jpg\n\n", argv[0]);
