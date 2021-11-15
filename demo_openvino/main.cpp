@@ -386,37 +386,37 @@ int main(int argc, char **argv)
 {
     if (argc != 6)
     {
-        //                      0  1      2            3             4           5
-        fprintf(stderr, "usage: %s [mode] [input_size] [model.param] [model.bin] [path]. \n 0. For webcam mode=0, path is cam id; \n 1. For image demo, mode=1, path=xxx/xxx/*.jpg; \n 2. For video, mode=2; \n 3. For benchmark, mode=3 path=0.\n 4. For Image benchmark, mode=4, path=xxx/xxx/*.jpg\n\n", argv[0]);
+        //                      0  1      2            3            4
+        fprintf(stderr, "usage: %s [mode] [input_size] [model.xml] [path]. \n 0. For webcam mode=0, path is cam id; \n 1. For image demo, mode=1, path=xxx/xxx/*.jpg; \n 2. For video, mode=2; \n 3. For benchmark, mode=3 path=0.\n 4. For Image benchmark, mode=4, path=xxx/xxx/*.jpg\n\n", argv[0]);
         return -1;
     }
 
     int mode = atoi(argv[1]);
     int inp_size = atoi(argv[2]);
     // NanoDet detector = NanoDet("./nanodet_m.param", "./nanodet_m.bin", true);
-    fprintf(stderr, "Loading NanoDet detector with '%s' and '%s'.\n", argv[3], argv[4]);
-    NanoDet detector = NanoDet(argv[3], argv[4], true);
+    fprintf(stderr, "Loading NanoDet detector with '%s'.\n", argv[3]);
+    NanoDet detector = NanoDet(argv[3]);
 
     fprintf(stderr, "Mode %d :", mode);
     switch (mode)
     {
     case 0:
     {
-        int cam_id = atoi(argv[5]);
+        int cam_id = atoi(argv[4]);
         fprintf(stderr, "Webcam. ID =  %d\n", cam_id);
         webcam_demo(detector, cam_id, inp_size);
         break;
     }
     case 1:
     {
-        const char *images = argv[5];
+        const char *images = argv[4];
         fprintf(stderr, "Images. Pattern =  %s\n", images);
         image_demo(detector, images, inp_size);
         break;
     }
     case 2:
     {
-        const char *path = argv[5];
+        const char *path = argv[4];
 
         fprintf(stderr, "Video. Path =  %s\n", path);
         video_demo(detector, path, inp_size);
@@ -430,7 +430,7 @@ int main(int argc, char **argv)
     }
     case 4:
     {
-        const char *images = argv[5];
+        const char *images = argv[4];
         fprintf(stderr, "Images Benchmark. Pattern =  %s\n", images);
         benchmark_images(detector, images, inp_size);
         break;
