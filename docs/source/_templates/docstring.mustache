@@ -1,0 +1,42 @@
+{{! Camodel Docstring Template }}
+
+{{summaryPlaceholder}}
+
+{{extendedSummaryPlaceholder}}
+
+{{#parametersExist}}
+{{#args}}
+:param {{var}}: 
+    {{descriptionPlaceholder}}
+
+{{/args}}
+{{#kwargs}}
+:param {{var}}: (optional)
+    {{descriptionPlaceholder}}. 
+    Defaults to {{&default}}.
+
+{{/kwargs}}
+{{/parametersExist}}
+{{#exceptionsExist}}
+{{#exceptions}}
+:raises {{type}}: 
+    {{descriptionPlaceholder}}
+
+{{/exceptions}}
+{{/exceptionsExist}}
+{{#yieldsExist}}
+{{#yields}}
+:yield: 
+    {{descriptionPlaceholder}}
+
+{{/yields}}
+{{/yieldsExist}}
+{{^yieldsExist}}
+{{#returnsExist}}
+{{#returns}}
+:return: 
+    {{descriptionPlaceholder}}
+
+{{/returns}}
+{{/returnsExist}}
+{{/yieldsExist}}

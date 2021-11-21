@@ -7,6 +7,7 @@
 [![Github downloads](https://img.shields.io/github/downloads/RangiLyu/nanodet/total?color=orange&label=downloads&logo=github&logoColor=lightgrey&style=flat)](https://img.shields.io/github/downloads/RangiLyu/nanodet/total?color=yellow&label=Downloads&logo=github&logoColor=lightgrey&style=flat)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/RangiLyu/nanodet?style=flat)](https://img.shields.io/github/v/release/RangiLyu/nanodet?style=flat)
 
+# Forked from [RangiLyu/nanodet](https://github.com/RangiLyu/nanodet)
 ### Super fast and lightweight anchor-free object detection model. Real-time on mobile devices.
 
 * ⚡Super lightweight: Model file is only 980KB(INT8) or 1.8MB(FP16).
@@ -132,30 +133,29 @@ Besides, We provide a notebook [here](./demo/demo-inference-with-pytorch.ipynb) 
 
 ### Step
 
-1. Create a conda virtual environment and then activate it.
-
-```shell script
- conda create -n nanodet python=3.8 -y
- conda activate nanodet
-```
-
-2. Install pytorch
-
-```shell script
-conda install pytorch torchvision cudatoolkit=11.1 -c pytorch -c conda-forge
-```
-
-3. Install requirements
-
-```shell script
-pip install Cython termcolor numpy tensorboard pycocotools matplotlib pyaml opencv-python tqdm pytorch-lightning torchmetrics
-```
-
-4. Setup NanoDet
+#### 1. Clone Repo
 
 ```shell script
 git clone https://github.com/RangiLyu/nanodet.git
 cd nanodet
+```
+
+#### 2.  Create a Python virtual environment and then activate it.
+
+```shell script
+virtualenv -p python3.9 .venv
+source .venv/bin/activate
+```
+
+#### 2. Install requirements
+
+```shell script
+pip install -r requirements.txt
+```
+
+#### 4. Install for development
+
+```shell script
 python setup.py develop
 ```
 

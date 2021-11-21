@@ -1,3 +1,18 @@
+# Dev tools
+black
+codecov
+flake8
+isort
+mypy
+pytest
+pytest-benchmark
+pytest-cov
+pytest-datafiles
+pytest-timeout
+
+# NanoDet Deps
+
+# original
 Cython
 matplotlib
 numpy
