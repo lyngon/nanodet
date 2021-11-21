@@ -17,6 +17,7 @@ import warnings
 
 from .coco import CocoDataset
 from .xml_dataset import XMLDataset
+from .camodel_dataset import CamodelDataset
 
 
 def build_dataset(cfg, mode):
@@ -37,5 +38,7 @@ def build_dataset(cfg, mode):
         return CocoDataset(mode=mode, **dataset_cfg)
     elif name == "XMLDataset":
         return XMLDataset(mode=mode, **dataset_cfg)
+    elif name == "CamodelDataset":
+        return CamodelDataset(mode=mode, **dataset_cfg)
     else:
         raise NotImplementedError("Unknown dataset type!")
