@@ -227,7 +227,7 @@ void draw_bboxes(const cv::Mat &bgr, const std::vector<BoxInfo> &bboxes, object_
                     cv::FONT_HERSHEY_SIMPLEX, 0.4, cv::Scalar(255, 255, 255));
     }
 
-    cv::imshow("image", image);
+    //  cv::imshow("image", image);
     cv::imwrite("out.jpg", image);
 }
 
