@@ -67,8 +67,16 @@ class CamodelDataset(CocoDataset):
     #     multi_scale: Optional[Tuple[float, float]] = None,
     # ):
     #     pass
-    def __init__(self, class_names, **kwargs):
+    def __init__(
+        self,
+        class_names,
+        annotation="groundtruth",
+        image_kind="redacted_foreground",
+        **kwargs,
+    ):
         self.class_names = class_names
+        self.annotation = annotation
+        self.image_kind = image_kind
         print(f"Camodel Dataset Args : {kwargs}")
         super(CamodelDataset, self).__init__(**kwargs)
 
@@ -153,22 +161,27 @@ class CamodelDataset(CocoDataset):
 
                 foreground_image_path = (
                     sample_metadata.get("annotations", {})
-                    .get("groundtruth", {})
+                    .get(self.annotation, {})
                     .get("images", {})
-                    .get("redacted_foreground", {})
+                    .get(
+                        self.image_kind,
+                        sample_metadata.get("images", {}).get(
+                            self.image_kind, {}
+                        ),
+                    )
                     .get("path", None)
                 )
                 if not foreground_image_path:
                     print(
-                        "Unable to find the groundtruth foreground image path "
-                        f"for sample : {sample_dir}"
+                        f"Unable to find the *{self.image_type}* image PATH for "
+                        f"annotation '{self.annotation}' for sample : {sample_dir}"
                     )
                     continue
                 print(foreground_image_path)
                 if not pathlib.Path(foreground_image_path).is_file():
                     print(
-                        "Unable to find the groundtruth foreground image file "
-                        f": {foreground_image_path}"
+                        f"Unable to find the *{self.image_type}* image FILE for"
+                        f"annotation '{self.annotation}' for sample : {sample_dir}"
                     )
                     continue
 

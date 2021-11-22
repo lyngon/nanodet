@@ -5,7 +5,7 @@
 #           AP_small = 0.082
 #               AP_m = 0.240
 #               AP_l = 0.375
-save_dir: models/munin/nanodet_1122
+save_dir: models/munin/nanodet_1122_input
 model:
   arch:
     name: OneStageDetector
@@ -63,6 +63,8 @@ data:
   train:
     name: CamodelDataset
     class_names: *class_names
+    annotation: null
+    image_kind: input
     img_path: .
     ann_path: data/munin/datasets/hack
     input_size: [416,416] #[w,h]
@@ -82,6 +84,8 @@ data:
   val:
     name: CamodelDataset
     class_names: *class_names
+    annotation: null
+    image_kind: input
     img_path: .
     ann_path: data/munin/datasets/hack
     input_size: [416,416] #[w,h]
@@ -93,8 +97,8 @@ device:
   workers_per_gpu: 8
   batchsize_per_gpu: 128
 schedule:
-  resume: True
-  # load_model: models/00_general/nanodet_m_416/nanodet_m_416.ckpt
+  # resume: True
+  load_model: models/00_general/nanodet_m_416/nanodet_m_416.ckpt
   optimizer:
     name: SGD
     lr: 0.14
