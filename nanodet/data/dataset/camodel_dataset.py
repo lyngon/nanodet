@@ -8,22 +8,23 @@ from pycocotools.coco import COCO
 
 from .coco import CocoDataset
 
-camodel_categories = [
-    ("person", 1),
-    ("bicycle", 2),
-    ("car", 3),
-    ("motorcycle", 4),
-    ("bus", 6),
-    ("train", 7),
-    ("truck", 8),
-    ("backpack", 27),
-    ("umbrella", 28),
-    ("handbag", 31),
-]
+# camodel_categories = [
+#     ("person", 1),
+#     ("bicycle", 2),
+#     ("car", 3),
+#     ("motorcycle", 4),
+#     ("bus", 6),
+#     ("train", 7),
+#     ("truck", 8),
+#     ("backpack", 27),
+#     ("umbrella", 28),
+#     ("handbag", 31),
+#     ("unknown", 0),
+# ]
 
-camodel_category_id_to_cat_index = {
-    cmid: ix for ix, (_, cmid) in enumerate(camodel_categories)
-}
+# camodel_category_id_to_cat_index = {
+#     cmid: ix for ix, (_, cmid) in enumerate(camodel_categories)
+# }
 
 
 class CocoCamodel(COCO):
@@ -66,8 +67,8 @@ class CamodelDataset(CocoDataset):
     #     multi_scale: Optional[Tuple[float, float]] = None,
     # ):
     #     pass
-    def __init__(self, **kwargs):
-        # self.class_names = class_names
+    def __init__(self, class_names, **kwargs):
+        self.class_names = class_names
         print(f"Camodel Dataset Args : {kwargs}")
         super(CamodelDataset, self).__init__(**kwargs)
 
@@ -102,8 +103,13 @@ class CamodelDataset(CocoDataset):
         ]
         coco_categories = [
             {"id": ix, "name": name, "supercategory": None}
-            for ix, (name, cmid) in enumerate(camodel_categories)
+            for ix, name in enumerate(self.class_names)
         ]
+        # coco_categories = [
+        #     {"id": ix, "name": name, "supercategory": None}
+        #     for ix, (name, cmid) in enumerate(camodel_categories)
+        # ]
+
         coco_images = []
 
         annotation_id = 0
@@ -201,9 +207,7 @@ class CamodelDataset(CocoDataset):
                         {
                             "id": annotation_id,
                             "image_id": image_id,
-                            "category_id": camodel_category_id_to_cat_index[
-                                label["category"]
-                            ],
+                            "category_id": label["category"],
                             "area": height_abs * width_abs,
                             "bbox": [left_abs, top_abs, width_abs, height_abs],
                             "iscrowd": 0,

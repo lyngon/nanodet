@@ -11,7 +11,7 @@ pytest-datafiles
 pytest-timeout
 
 # NanoDet Deps
-
+onnx-simplifier
 # original
 Cython
 matplotlib
