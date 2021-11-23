@@ -5,7 +5,7 @@
 #           AP_small = 0.082
 #               AP_m = 0.240
 #               AP_l = 0.375
-save_dir: models/munin/nanodet_1122_input
+save_dir: models/munin/nanodet_1123_fg
 model:
   arch:
     name: OneStageDetector
@@ -95,7 +95,7 @@ data:
 device:
   gpu_ids: [0, 1]
   workers_per_gpu: 8
-  batchsize_per_gpu: 512
+  batchsize_per_gpu: 128
 schedule:
   # # For transfer learning / fine-tuning. EITHER:
   # # Resume from a previous training: Use 'resume: True'
