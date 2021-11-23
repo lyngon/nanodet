@@ -210,12 +210,10 @@ class CamodelDataset(CocoDataset):
                     top_abs = sample_height * (
                         label["location"]["y"] - label["location"]["n"]
                     )
-                    width_abs = sample_width * (
-                        label["location"]["x"] + label["location"]["u"]
-                    )
-                    height_abs = sample_height * (
-                        label["location"]["y"] + label["location"]["n"]
-                    )
+                    width_abs = sample_width * 2 * label["location"]["u"]
+
+                    height_abs = sample_height * 2 * label["location"]["n"]
+
                     self.instances[group].append(
                         {
                             "id": annotation_id,
